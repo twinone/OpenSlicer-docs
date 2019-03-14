@@ -1,0 +1,128 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Context and scope}
+
+\subsection{Introduction}
+\subsubsection{Project goal}
+There are multiple techniques to create real-world objects from a three-dimensional model.
+We will focus on Fused Filament Fabrication, a specific form of 3D printing, which consists in melting a filament of thermoplastic polymer, in a layer-by-layer fashion.
+
+When modeling 3D objects with computer programs, they are usually represented as a set of triangles, in \textsc{stl} format. A 3D printer can only execute simple commands, like moving a motor forward, or extruding filament. These commands are usually in \textsc{gcode} format.
+
+Slicing is the process of converting the 3D model in \textsc{stl} format to the \textsc{gcode} required by the 3D printer. A 3D printer typically has a simple microcontroller that is not powerful enough to slice the model, so an external program, called a \textsc{slicer} is used.
+
+It is useful for 3D printer owners to remotely monitor and control it, stop it in case of a failure, and even start a print while not being present. This is usually accomplished by connecting a small computer to the printer. These computers  are able to slice a model, but often have limited resources, difficult processor architectures, or the process is very slow.
+
+To solve this, we create \textsc{OpenSlicer}. A slicer that is designed to be run in a web browser, so it is platform independent. Since the slicing occurs in the client's browser, the slicer can easily be hosted as a static page on the 3D printer itself.
+
+
+\subsubsection{Stakeholders}
+\begin{itemize}
+    \item \textbf{Project developer}. I will be developing the project, doing the necessary research, testing and programming to make it succeed.
+    \item \textbf{Project director}. Marta Fairén is the director of this project. As an Assistant Professor of the Computer Science department of the Polytechnic University of Catalonia, she will be helping the project developer with any problems, as well as providing feedback, improvement suggestions and technical advice to make sure the project succeeds.
+    \item \textbf{The community} will be able to contribute, learn, improve, share, and use the software.
+    \item \textbf{3D printer owners}  will be able to use the slicer from their phones or laptops to remotely slice their objects and print them.
+    \item \textbf{3D printer manufacturers} will be able to host the slicer on the printer directly, without having to worry about updates, or maintenance of the slicer. They can then focus only on their main business: building 3D printers.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{State of the art}
+In this section we will briefly discuss existing technology, as well as what this project aims to accomplish.
+
+\subsubsection{3D viewers}
+3D visualization of models is a deeply explored field. There are very robust libraries that offer 3D visualization \cite{gh:threejs}. They are used in all kinds of software: games, design studios, CAD programs, medical applications, etc. Therefore, we will use a library for our 3D viewer.
+
+\subsubsection{Polygon clipping}
+There are numerous clipping libraries in different languages \cite{gh:clipper-lib, gh:clipper, gh:lineclip}. This field has been deeply explored in the past, and efficient polygon clipping is considered a solved problem. We will use a library for polygon clipping.
+
+\subsubsection{Existing slicers}
+Other slicers are abundant \cite{gh:curaengine, gh:slic3r}. This project will use mostly own algorithms but some will be inspired on existing slicers.
+
+\subsubsection{Bridging the gap}
+Existing slicers are designed for optimal performance, and are compiled to run as a binary on the user's system. We compromise performance, as our slicer will run in the browser, but obtain the following advantages:
+
+\begin{itemize}
+    \item A 3D printer's microcontroller can serve the slicer without the need of an more powerful computer.
+    \item Slicing on mobile phones and tablets
+    \item Refreshing the page will update the slicer.
+    \item Cross platform out of the box.
+    \item No dependencies or installs.
+    \item Possibility to run in the cloud and manage 3D models from any device.
+\end{itemize}
+
+Most of these features are new for Fused Filament Fabrication slicers. The performance compromise is insignificant compared to the actual print time.
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Scope}
+A fully functional slicer will be developed and tested on a live 3D printer. The slicer should be able to output \textsc{gcode} that produces a physical object that accurately resembles the original 3D model.
+
+\subsubsection{Minimum requirements}
+There are several stages to the slicing process that must be implemented for it to work properly:
+
+\begin{itemize}
+    \item \textbf{A graphical user interface} to move, scale and rotate the object, as well as manipulating different settings of the slicing process, such as the speed, layer height, nozzle diameter, print and bed temperature.
+    \item \textbf{A 2-manifold \cite{wiki:2-manifold} check algorithm}, that detects whether the input model is watertight and can be sliced correctly.
+    \item \textbf{A 3D geometry intersection}, that generates layer perimeter polygons intersecting a plane with the model's triangles.
+    \item \textbf{A 2D polygon clipping algorithm} to generate internal perimeters and calculate the infill.
+    \item \textbf{An ordering algorithm} to create a chain of segments that will form each layer in the final print. This should minimize the total print time.
+    \item \textbf{An output  generator}, that will take the segment chain and convert it to \textsc{gcode} for printing. This generator might also add calibration, homing, or other instructions at the begin or end of the gcode.
+\end{itemize}
+
+\subsubsection{Extras}
+
+Additional features that greatly improve print quality, but are harder to implement may be added if time permits:
+
+\begin{itemize}
+    \item \textbf{Infill pattern generation}, to avoid printing at 100\% density.
+    \item \textbf{Automatic support structure generation}, to be able to print with overhangs correctly.
+    \item \textbf{Decimation}, to allow extremely detailed objects to be sliced correctly.
+    \item \textbf{Retraction}, to improve bridging and reduce stringing.
+    \item \textbf{Layer-by-layer settings} can greatly improve surface finish while keeping print times low.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Possible obstacles and solutions}
+This section will discuss some of the problems that might arise during the development of the project.
+
+\begin{itemize}
+    \item \textbf{Breaking the 3D printer} would leave us without a testing machine. This a realistic problem because sending the wrong \textsc{gcode} to the printer may run the nozzle into the bed, or heat it so much that the power supply fails.
+    \item \textbf{Floating point precision}. The precision of floating points or doubles is limited, so we will need to find a solution to that. There are several ways to do this, which will be discussed in the technical part of this project.
+    \item \textbf{Bugs.} Developing a slicer is no easy task. Companies have been developing them for decades and their commercial products are still containing a lot of bugs. It seems natural that our team consisting of a single developer will have some trouble designing a fully functional slicer from scratch will encounter some time-consuming bugs that might lead to delays or even missed deadlines. We will use a version control system and continuous integration tests to track bugs and prevent them from happening in the first place.
+    \item \textbf{Algorithm efficiency}. It is entirely possible that the algorithms developed during this project are not fast enough to run on decent hardware. If this is the case the project might fail completely, or be too slow to be usable. The solution to this problem is to ensure that we are using reasonably fast algorithms.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Methodology and rigor}
+
+\subsubsection{Methodology}
+Since there will be a single developer in the project, it does not make sense to follow very complex methodologies, but we will apply some good practices and principles from well-known methodologies:
+\begin{itemize}
+    \item From \textbf{Test Driven Development}: We will have automated tests before every commit to avoid introducing most bugs.
+    \item From \textbf{Agile Development} We will only commit code that compiles and runs correctly, and make small changes.
+    \item We will set some milestones in order to be aware of the general timeline of the project.
+    \item Using git as version control system will allow us to go back to any previous state of the project, as well as to rapidly track down bugs using git-bisect \cite{git-bisect}
+\end{itemize}
+
+\subsubsection{Rigor}
+\begin{itemize}
+    \item To check whether our project meets industry standards we will benchmark the different stages of the slicing process.
+    \item We will exhaustively test edge cases and difficult objects in order to validate the robustness of our slicer. This will be done in an automated fashion as well as by hand.
+    \item Real 3D prints will be used to measure the accuracy of the slicer, absolute and relative errors will be measured and improved on.
+\end{itemize}
+
+

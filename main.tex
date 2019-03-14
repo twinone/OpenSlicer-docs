@@ -1,0 +1,68 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{fix-cm}  
+\usepackage{bophook}
+\usepackage{tikz}
+\usepackage{roboto}
+\usepackage{minted}
+\usepackage{pdflscape}
+\usepackage{parskip} % http://ctan.org/pkg/parskip
+\usepackage[nottoc,numbib]{tocbibind} %add bib to table of contents
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+allcolors = black,
+urlcolor = [rgb]{0,0,0.8},
+}
+
+
+
+% logo fib
+% \AtBeginPage{
+% \begin{tikzpicture}[remember picture,overlay]
+%   \node[anchor=north east,inner sep=10pt] at (current page.north east)
+%               {\includegraphics[scale=0.2]{images/upc-fib-logos.png}};
+% \end{tikzpicture}
+% }
+
+
+
+
+
+%\pagestyle{fancy}
+
+\makeatletter
+\newcommand\HUGE{\@setfontsize\Huge{60}{70}}
+\makeatother    
+
+
+\graphicspath{ {./images/} }
+\bibliographystyle{unsrt}
+
+
+
+%%%%% DOCUMENT %%%%%
+
+\begin{document}
+\setlength{\parskip}{10pt}
+\setlength{\parindent}{0pt}
+
+
+\begin{titlepage}
+\input{src/titlepage.tex}
+\end{titlepage}
+
+\tableofcontents
+\pagebreak
+
+\input{src/gep-1.tex}
+\input{src/gep-2.tex}
+\input{src/gep-3.tex}
+
+\pagebreak
+\bibliography{./src/references}
+
+\end{document}
