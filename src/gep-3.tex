@@ -7,6 +7,7 @@ In this section, an estimation of the cost of the project is presented, taking i
 \autoref{table:res-hw}
 shows the hardware resources budget needed in order to develop and test the project.
 
+\FloatBarrier
 \begin{table}[h!]
 \centering
 \begin{tabular}{ |c|c|c|c|c| } 
@@ -24,12 +25,14 @@ shows the hardware resources budget needed in order to develop and test the proj
 \end{tabular}
 \caption{Hardware budget}\label{table:res-hw}
 \end{table}
+\FloatBarrier
 
 \subsubsection{Software budget}
 
 \autoref{table:res-sw}
 shows the software resources budget needed in order to develop and test the project.
 
+\FloatBarrier
 \begin{table}[h!]
 \centering
 \begin{tabular}{ |c|c|c|c| } 
@@ -65,13 +68,14 @@ shows the software resources budget needed in order to develop and test the proj
 \end{tabular}
 \caption{Software budget}\label{table:res-sw}
 \end{table}
-
+\FloatBarrier
 
 \subsubsection{Human resources budget}
 
 \autoref{table:res-hres}
 shows the human resources budget needed in order to develop and test the project.
 
+\FloatBarrier
 \begin{table}[h!]
 \centering
 \begin{tabular}{ |c|c|c|c| } 
@@ -86,19 +90,19 @@ shows the human resources budget needed in order to develop and test the project
     Tester & 30€ & 100 & 3,000€ \\
     \hline
     \hline
-    Total & & & 14,500€ \\
+    Total & & 450 & 14,500€ \\
     \hline
 \end{tabular}
-\caption{Human resources budget}\label{table:res-hres}
+\caption{Human resources budget \cite{dev-salary, pm-salary, qa-eng-salary}}\label{table:res-hres}
 \end{table}
-
+\FloatBarrier
 
 Since the modules of the project are mostly independent, and equally important, the different roles are distributed evenly across all tasks.
 
 \subsubsection{Unexpected costs}
 \autoref{table:res-extra} shows a generous budget margin for problems or deviations that may arise. This extra budget is very unlikely to be used because of the robust planning of the previous deliverable.
 
-
+\FloatBarrier
 \begin{table}[h!]
 \centering
 \begin{tabular}{ |c|c|c|c| } 
@@ -116,8 +120,46 @@ Since the modules of the project are mostly independent, and equally important, 
     Total & & & 1,400€ \\
     \hline
 \end{tabular}
-\caption{Extra human resources budget}\label{table:res-extra}
+\caption{Extra human resources budget \cite{dev-salary, pm-salary, qa-eng-salary}}\label{table:res-extra}
 \end{table}
+\FloatBarrier
+
+
+
+\subsubsection{Direct costs breakdown}
+
+\autoref{table:res-direct-breakdown} shows the breakdown of costs per task listed in the Gantt chart.
+
+
+
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c| } 
+    \hline
+    Task & HW & PM & SW Dev & Tester & Total \\
+    \hline
+    \hline
+    Project Setup & 571.25€ & 250€ & 1500€ & 0€ & 1879€ \\
+    \hline
+    3D Viewer, GUI & 0€ & 500€ & 1500€ & 600€ & 2,600€ \\
+    \hline
+    Slicer & 0€ & 500€ & 1500€ & 600€ & 2,600€ \\
+    \hline
+    Toolpath generator & 0€ & 500€ & 1500€ & 600€ & 2,600€ \\
+    \hline
+    GCODE generator & 0€ & 500€ & 1500€ & 600€ & 2,600€ \\
+    \hline
+    Bugfixes & 0€ & 250€ & 1500€ & 600€ & 2,350€ \\
+    \hline
+    \hline
+    Total & 571.25€ & 2,500€ & 9,000€ & 3,000€ & 15,071.25€ \\
+    \hline
+\end{tabular}
+\caption{Direct costs breakdown}
+\label{table:res-direct-breakdown}
+\end{table}
+\FloatBarrier
 
 
 \subsubsection{Indirect costs}
@@ -125,9 +167,9 @@ Since the modules of the project are mostly independent, and equally important, 
 \autoref{table:res-indirect-costs}
 shows the indirect costs related to developing and testing the project.
 
-For this project we will fix the price of electricity at 0.12€/kWh. A 3D printer consumes about 0.2kWh, a laptop about 0.06kWh, and the rest (router, lights) about 0.03kWh. We will assume everything is running during the whole development of the project, except for the 3D printer, which will only be needed in the latest stages of the project, and we will consider it is used only the last 50\% of the project. This brings us at a total electricity consumption of about 100kWh.
+For this project we will fix the price of electricity at 0.12€/kWh \cite{price-electricity-endesa}. A 3D printer consumes about 0.2kWh, a laptop about 0.06kWh, and the rest (router, lights) about 0.03kWh. We will assume everything is running during the whole development of the project, except for the 3D printer, which will only be needed in the latest stages of the project, and we will consider it is used only the last 50\% of the project. This brings us at a total electricity consumption of about 100kWh.
 
-
+\FloatBarrier
 \begin{table}[h!]
 \centering
 \begin{tabular}{ |c|c|c|c| } 
@@ -145,12 +187,14 @@ For this project we will fix the price of electricity at 0.12€/kWh. A 3D print
     Total & & & 292€ \\
     \hline
 \end{tabular}
-\caption{Indirect costs}\label{table:res-indirect-costs}
+\caption{Indirect costs \cite{price-electricity-endesa, price-vodafone-adsl, price-coffee-nespresso}}\label{table:res-indirect-costs}
 \end{table}
+\FloatBarrier
 
 \subsubsection{Total budget}
 We will calculate the total budget by adding all previous budgets together. This is shown in \autoref{table:res-total-costs}.
 
+\FloatBarrier
 \begin{table}[h!]
 \centering
 \begin{tabular}{ |c|c| } 
@@ -174,17 +218,26 @@ We will calculate the total budget by adding all previous budgets together. This
 \end{tabular}
 \caption{Total budget}\label{table:res-total-costs}
 \end{table}
+\FloatBarrier
 
 \subsubsection{Budget management}
 It is unlikely that we will exceed our budget, since our project planning section was quite robust. We have already accounted for a generous error margin to fix bugs or compensate for delays in the development of complex algorithms. It might still be possible to need extra resources or hire an additional software developer as a consultant. We have also taken this into account when creating our budget. We are being extremely cautious about human resources budget allocation since this is the most expensive part of it.
 
 As we discussed earlier, it is possible to break the 3D printer while doing our testing. In this case we will work on a gcode simulator that comes with most existing slicers. This will add nothing to our budget, and we will continue the project in a theoretical way, without actual 3D printed tests or examples.
 
+We will be monitoring the progress of the project according to the Gantt chart shown previously. If delays occur, we will allocate an extra software developer or tester to solve the specific issue that is causing the delay. In this case, this extra developer will count against the extra budget we have defined earlier.
+
+Following the previous procedure, we can guarantee that we will not exceed our timeline significantly, and we will still stay in our allocated budget, since we already accounted for possible delays or unexpected costs.
 
 
 \subsection{Sustainability report}
+
+
 In this section we analyze the sustainability of the project. Its impact is analyzed in its three dimensions: social, economical and environmental.
 
+This is a project consisting of mostly software. There are alternatives already in the market with similar features. We will not be causing a significant social, economical or environmental impact.
+
+Sustainability does not really apply to this project in all of its dimensions, but we will analyze them anyway for the sake of completeness.
 
 \subsubsection{Social impact}
 On a personal level, this project allows me to push my limits on development and testing, as well as to deduce complex algorithms and development methods. It will help me know my limits and capabilities and provide me with a fun time to learn and experiment.
@@ -202,10 +255,29 @@ We try to use mostly free software, and our product will also be a free software
 We will be using 100kWh of electricity while developing and testing the project, which is equivalent to approximately 28.3 kg of CO${_2}$. This might seem like a lot until we add our team of humans, who breathe during development, which accounts for approximately 50 more kg of CO${_2}$, for a total of 78.3 kg \cite{co2-breathing}.
 
 
-We will be using Polylactic Acid (PLA) as our only plastic during the testing phase. It is a bioplastic material, biodegradable and reduces CO$_{2}$ \cite{pla-co2, env-impact-3dp}. This is one of the best materials to use when 3D printing and we choose this for our testing because of its nice environmental properties.
+We will be using Polylactic Acid (PLA) as our only plastic during the testing phase. It is a bio-plastic material, biodegradable and reduces CO$_{2}$ \cite{pla-co2, env-impact-3dp}. This is one of the best materials to use when 3D printing and we choose this for our testing because of its nice environmental properties.
 
 
+\subsubsection{Sustainability Matrix}
+Taking into account the previous sections, in \autoref{table:sustainability-matrix} we show the sustainability matrix of this project in its three dimensions.
 
-
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+ & PPP & Useful Life & Risks \\ \hline
+\multirow{2}{*}{Environmental} & \begin{tabular}[c]{@{}c@{}}Design\\ consumption\end{tabular} & \begin{tabular}[c]{@{}c@{}}Ecological\\ footprint\end{tabular} & \begin{tabular}[c]{@{}c@{}}Environmental\\ risks\end{tabular} \\ \cline{2-4} 
+ & 9 / 10 & 18 / 20 & -5 / -20 \\ \hline
+\multirow{2}{*}{Economical} & Bill & \begin{tabular}[c]{@{}c@{}}Viability\\ plan\end{tabular} & \begin{tabular}[c]{@{}c@{}}Economical\\ risks\end{tabular} \\ \cline{2-4} 
+ & 8 / 10 & 17 / 20 & -2 / -20 \\ \hline
+\multirow{2}{*}{Social} & \begin{tabular}[c]{@{}c@{}}Personal\\ impact\end{tabular} & \begin{tabular}[c]{@{}c@{}}Social\\ impact\end{tabular} & \begin{tabular}[c]{@{}c@{}}Social\\ risks\end{tabular} \\ \cline{2-4} 
+ & 8 / 10 & 10 / 20 & -1 / -20 \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Sustainability\\ range\end{tabular}} & 25 / 30 & 45 / 60 & -8 / -60 \\ \cline{2-4} 
+ & \multicolumn{3}{c|}{62 / 90} \\ \hline
+\end{tabular}
+\caption{Sustainability matrix}\label{table:sustainability-matrix}
+\end{table}
+\FloatBarrier
 
 

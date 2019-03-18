@@ -12,6 +12,15 @@
 \usepackage{parskip} % http://ctan.org/pkg/parskip
 \usepackage[nottoc,numbib]{tocbibind} %add bib to table of contents
 \usepackage{hyperref}
+% to avoid table floats, use with \FloatBarrier
+\usepackage{placeins}
+% table merge cells
+\usepackage{multirow}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+
+
+
 \hypersetup{
 colorlinks=true,
 allcolors = black,
@@ -63,6 +72,10 @@ urlcolor = [rgb]{0,0,0.8},
 \input{src/gep-3.tex}
 
 \pagebreak
+
+\begingroup
+\raggedright
 \bibliography{./src/references}
+\endgroup
 
 \end{document}
