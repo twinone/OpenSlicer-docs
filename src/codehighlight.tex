@@ -1,0 +1,35 @@
+% https://tex.stackexchange.com/a/141128
+
+%%%%% OLD SOLUTION %%%%%
+% \definecolor{codegrey}{rgb}{0.937, 0.937, 0.937}
+
+% \newverbcommand{\code}
+%   {\begin{lrbox}{\verbbox}}
+%   {\end{lrbox}\colorbox{codegrey}{\box\verbbox}}
+
+\usepackage{fancyvrb,newverbs,xcolor}
+\usepackage{lipsum}% just for this example
+
+\definecolor{cverbbg}{gray}{0.93}
+
+\newenvironment{cverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{\BUseVerbatim{cverb}}%
+  \endflushleft
+}
+\newenvironment{lcverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\newcommand{\ctexttt}[1]{\colorbox{cverbbg}{\texttt{#1}}}
+\newverbcommand{\code}
+  {\setbox\verbbox\hbox\bgroup}
+  {\egroup\colorbox{cverbbg}{\box\verbbox}}

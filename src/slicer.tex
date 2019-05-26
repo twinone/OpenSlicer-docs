@@ -1,0 +1,65 @@
+\pagebreak
+
+\section{Slicer}
+The Slicer is responsible for taking an object as a list of triangles, and return a list of layers that the Toolpath Generator can later translate into GCODE. Each of these layers contains a list of ordered segments, which represent the path for the printing head to travel along.
+
+The slicing process is much easier to understand and implement if done in parts.
+
+\subsection{2-manifold checking}
+To verify that the object is actually printable, we need to check that it is a valid 2-manifold. 
+
+The initial plan was to test the validity of an object and rejecting non manifolds, but we have decided that it's best to just check and throw a warning in this case, and perform a slice on a best-effort basis. It is better to have an object slice wrong, than to not slice it at all.
+
+Since this will only be a warning, it will be left out for now. In the final delivery it may or may not be included. * TODO
+
+\subsection{Slicer}
+
+It might be confusing to use the word Slicer for this part. Previously we defined slicing as the process of converting an object to 3D printer instructions. Slicing is also the process of cutting an object by a plane. This subsection is all about that: Intersecting a plane with a 3D object.
+
+The algorithm we use for this is fairly simple: We simply take all triangles individually and intersect them with the plane. The intersection segment is added to the resulting list. If the plane intersects a given triangle on an edge or vertex, we will still include the segments in the result list. 
+
+This algorithm will return an unordered list of segments, that are the segments where the plane intersects the object. If the object is a valid 2-manifold, then the resulting list can be ordered in a unique way, constructing a valid Surface.
+
+
+\subsection{Polygon generator}
+The polygon generation consists of taking the unordered list of segments that the Slicer produced, and order them into a surface.
+
+We define a surfaces to be a list of polygons and a list of holes, which are also polygons. This definition of surface can describe any boolean 2D geometry.
+
+Provided the object was a valid 2-manifold, all vertices in the slicer's output have degree exactly 2, which makes it trivial to construct the list of polygons.
+
+We still need to determine whether a polygon is a hole or not. We can determine this easily with a simple ray tracing: Given a polygon, we take one of its vertices v and trace a straight line in any direction. If it intersects an odd number of polygons on one side of v, then this polygon is a hole. Otherwise it's part of the surface.
+
+For this algorithm we need to be careful with edge cases: If we happen to trace a line from a hole, that intersects a parent polygon on one of its vertices, we might count that intersection twice, and think that this polygon is part of the surface while it's actually a hole.
+
+\subsubsection{About the necessity of this section}
+Instead of generating polygons for each layer, we can instead intersect the object directly with parallel lines for each desired height and width of the 3D printer. This will however generate only movement in one direction, and produces extremely ugly results, similar to when you color a drawing in a zigzag pattern instead of going around the edges first.
+
+Having the polygon information allows us to inset them by the desired amount so we can create smooth perimeters without affecting the dimensions of the object, while also allowing for infill to be rectilinear.
+
+* TODO: Pictures illustrating all of this better
+
+\subsection{Generating segments}
+
+Given a surface, we need to generate the actual segments along which the 3D printer will travel. To keep things simple, these will always be parallel lines, a fixed distance from each other.
+
+We will follow a similar approach than with the slicing process: We will intersect each polygon with vertical planes to obtain the segments we want.
+
+For each of those vertical planes, we intersect the polygon with it, and obtain a list of points. We sort these points and create segments between all adjacent points. We must get an odd number of segments, and all segments in even positions are holes, and are removed from the resulting set.
+
+This gives us a list of segments that, if printed in the correct order, produce the expected object.
+
+
+\subsection{Ordering segments}
+Ordering segments is trivial. We will take a left-to-right and top-to-bottom approach to order them, which will yield relatively good results on any object. There are more complex ordering algorithms but they are out of the scope of this project.
+
+\subsection{Toolpath generator}
+
+The only thing that's left now is to translate the ordered segments into machine code. This is done by taking the start and end vertices of each segment and append the corresponding instructions to a list.
+
+
+
+
+
+
+

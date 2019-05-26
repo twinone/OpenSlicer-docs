@@ -9,6 +9,8 @@
 \usepackage{roboto}
 \usepackage{minted}
 \usepackage{pdflscape}
+\usepackage{xcolor}
+\usepackage{newverbs}
 \usepackage{parskip} % http://ctan.org/pkg/parskip
 \usepackage[nottoc,numbib]{tocbibind} %add bib to table of contents
 \usepackage{hyperref}
@@ -38,7 +40,7 @@ urlcolor = [rgb]{0,0,0.8},
 % }
 
 
-
+\input{src/codehighlight.tex}
 
 
 %\pagestyle{fancy}
@@ -50,8 +52,6 @@ urlcolor = [rgb]{0,0,0.8},
 
 \graphicspath{ {./images/} }
 \bibliographystyle{unsrt}
-
-
 
 %%%%% DOCUMENT %%%%%
 
@@ -70,6 +70,10 @@ urlcolor = [rgb]{0,0,0.8},
 \input{src/gep-1.tex}
 \input{src/gep-2.tex}
 \input{src/gep-3.tex}
+\input{src/legal-technical.tex}
+\input{src/viewer.tex}
+\input{src/slicer.tex}
+\input{src/conclusions.tex}
 
 \pagebreak
 

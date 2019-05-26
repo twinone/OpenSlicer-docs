@@ -72,7 +72,7 @@ There are several stages to the slicing process that must be implemented for it 
 \begin{itemize}
     \item \textbf{A graphical user interface} to move, scale and rotate the object, as well as manipulating different settings of the slicing process, such as the speed, layer height, nozzle diameter, print and bed temperature.
     \item \textbf{A 2-manifold \cite{wiki:2-manifold} check algorithm}, that detects whether the input model is watertight and can be sliced correctly.
-    \item \textbf{A 3D geometry intersection}, that generates layer perimeter polygons intersecting a plane with the model's triangles.
+    \item \textbf{A 3D geometry intersection algorithm}, that generates layer perimeter polygons intersecting a plane with the model's triangles.
     \item \textbf{A 2D polygon clipping algorithm} to generate internal perimeters and calculate the infill.
     \item \textbf{An ordering algorithm} to create a chain of segments that will form each layer in the final print. This should minimize the total print time.
     \item \textbf{An output  generator}, that will take the segment chain and convert it to \textsc{gcode} for printing. This generator might also add calibration, homing, or other instructions at the begin or end of the gcode.
